@@ -36,7 +36,14 @@ addons = [
   {
     name    = "aws-ebs-csi-driver"
     version = "v1.46.0-eksbuild.1"
+  },
+
+  {
+    name    = "aws-alb-ingress-controller"
+    version = "v2.5.1-eksbuild.1"
   }
+
+
   # Add more addons as needed
 ]
 
