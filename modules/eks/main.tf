@@ -2,14 +2,14 @@ resource "aws_eks_cluster" "eks" {
 
   count    = var.is_eks_cluster_enabled == true ? 1 : 0
   name     = var.cluster_name
-  role_arn = aws_iam_role.eks-cluster-role[count.index].arn
+  role_arn = var.eks_cluster_role_arn
   version  = var.cluster_version
 
   vpc_config {
-    subnet_ids              = [aws_subnet.private_subnet[0].id, aws_subnet.private_subnet[1].id, aws_subnet.private_subnet[2].id]
+    subnet_ids              = var.subnet_ids
     endpoint_private_access = var.endpoint_private_access
     endpoint_public_access  = var.endpoint_public_access
-    security_group_ids      = [aws_security_group.eks-cluster-sg.id]
+    security_group_ids      = var.security_group_ids
   }
 
 
@@ -25,6 +25,12 @@ resource "aws_eks_cluster" "eks" {
 }
 
 # OIDC Provider
+# Data source for TLS certificate needs to be correct.
+# Usually we get the OIDC issuer URL from the cluster and then get the thumbprint.
+data "tls_certificate" "eks_certificate" {
+  url = aws_eks_cluster.eks[0].identity[0].oidc[0].issuer
+}
+
 resource "aws_iam_openid_connect_provider" "eks-oidc" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [data.tls_certificate.eks_certificate.certificates[0].sha1_fingerprint]
@@ -50,7 +56,7 @@ resource "aws_eks_node_group" "ondemand-node" {
   cluster_name    = aws_eks_cluster.eks[0].name
   node_group_name = "${var.cluster_name}-on-demand-nodes"
 
-  node_role_arn = aws_iam_role.eks-nodegroup-role[0].arn
+  node_role_arn = var.eks_node_role_arn
 
   scaling_config {
     desired_size = var.desired_capacity_on_demand
@@ -58,7 +64,7 @@ resource "aws_eks_node_group" "ondemand-node" {
     max_size     = var.max_capacity_on_demand
   }
 
-  subnet_ids = [aws_subnet.private_subnet[0].id, aws_subnet.private_subnet[1].id, aws_subnet.private_subnet[2].id]
+  subnet_ids = var.subnet_ids
 
   instance_types = var.ondemand_instance_types
   capacity_type  = "ON_DEMAND"
@@ -84,7 +90,7 @@ resource "aws_eks_node_group" "spot-node" {
   cluster_name    = aws_eks_cluster.eks[0].name
   node_group_name = "${var.cluster_name}-spot-nodes"
 
-  node_role_arn = aws_iam_role.eks-nodegroup-role[0].arn
+  node_role_arn = var.eks_node_role_arn
 
   scaling_config {
     desired_size = var.desired_capacity_spot
@@ -92,7 +98,7 @@ resource "aws_eks_node_group" "spot-node" {
     max_size     = var.max_capacity_spot
   }
 
-  subnet_ids = [aws_subnet.private_subnet[0].id, aws_subnet.private_subnet[1].id, aws_subnet.private_subnet[2].id]
+  subnet_ids = var.subnet_ids
 
   instance_types = var.spot_instance_types
   capacity_type  = "SPOT"
