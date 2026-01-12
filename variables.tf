@@ -28,6 +28,7 @@ variable "cluster_version" {}
 variable "endpoint_private_access" {}
 variable "endpoint_public_access" {}
 variable "authentication_mode" {}
+
 variable "ondemand_instance_types" {}
 variable "spot_instance_types" {}
 variable "desired_capacity_on_demand" {}
@@ -58,4 +59,9 @@ variable "bastion_key_name" {
 
 variable "bastion_tags" {
   type = map(string)
+}
+
+variable "tags" {
+  description = "Common tags for resources"
+  type        = map(string)
 }
