@@ -46,6 +46,7 @@ module "eks" {
   cluster_version            = var.cluster_version
   endpoint_private_access    = var.endpoint_private_access
   endpoint_public_access     = var.endpoint_public_access
+  authentication_mode        = var.authentication_mode
   ondemand_instance_types    = var.ondemand_instance_types
   spot_instance_types        = var.spot_instance_types
   desired_capacity_on_demand = var.desired_capacity_on_demand

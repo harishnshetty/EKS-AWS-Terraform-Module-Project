@@ -77,3 +77,8 @@ variable "eks_cluster_role_arn" {
 variable "eks_node_role_arn" {
   type = string
 }
+
+
+variable "authentication_mode" {
+  type = string
+}

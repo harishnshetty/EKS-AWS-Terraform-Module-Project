@@ -27,6 +27,7 @@ variable "is_eks_cluster_enabled" {}
 variable "cluster_version" {}
 variable "endpoint_private_access" {}
 variable "endpoint_public_access" {}
+variable "authentication_mode" {}
 variable "ondemand_instance_types" {}
 variable "spot_instance_types" {}
 variable "desired_capacity_on_demand" {}
