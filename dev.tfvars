@@ -2,8 +2,8 @@ env            = "dev"
 region         = "ap-south-1"
 vpc_cidr_block = "10.75.0.0/16"
 
-public_subnet  = ["10.75.1.0/20", "10.75.2.0/20", "10.75.3.0/20"]
-private_subnet = ["10.75.4.0/20", "10.75.6.0/20", "10.75.8.0/20"]
+public_subnet  = ["10.75.1.0/24", "10.75.2.0/24", "10.75.3.0/24"]
+private_subnet = ["10.75.4.0/24", "10.75.6.0/24", "10.75.8.0/24"]
 
 
 # EKS
@@ -48,7 +48,7 @@ addons = [
 
 
 #BASTION
-bastion_image_id      = "ami-0c44f651ab5e9285f" # change this to your own ami id
+bastion_image_id      = "ami-02b8269d5e85954ef" # change this to your own ami id ubuntu machine
 bastion_instance_type = "t2.micro"
 bastion_tags          = { Name = "bastion-dev" }
 bastion_key_name      = "new-keypair" # create your own key pair

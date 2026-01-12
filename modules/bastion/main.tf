@@ -5,4 +5,5 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = var.security_groups
   tags                   = var.tags
   key_name               = var.key_name
+  user_data              = var.user_data
 }

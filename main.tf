@@ -67,6 +67,7 @@ module "bastion" {
   security_groups = [module.sg.bastion_sg_id]
   key_name        = var.bastion_key_name
   tags            = var.bastion_tags
+  user_data       = file("bastion_script.sh")
 
   depends_on = [module.sg]
 }

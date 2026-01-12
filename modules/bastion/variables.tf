@@ -21,3 +21,7 @@ variable "tags" {
 variable "key_name" {
   type = string
 }
+
+variable "user_data" {
+  type = string
+}
