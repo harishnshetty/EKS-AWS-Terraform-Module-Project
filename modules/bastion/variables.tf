@@ -25,3 +25,9 @@ variable "key_name" {
 variable "user_data" {
   type = string
 }
+
+variable "iam_instance_profile_name" {
+  description = "IAM instance profile to attach to the bastion instance"
+  type        = string
+  default     = null
+}

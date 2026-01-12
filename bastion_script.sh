@@ -16,7 +16,30 @@ apt-get install -y \
   gnupg \
   lsb-release \
   bash-completion \
-  apt-transport-https
+  apt-transport-https \
+  unzip
+
+
+############################################
+# Install AWS CLI v2
+############################################
+
+# Download AWS CLI v2
+curl -fsSL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
+
+# Unzip
+unzip -q /tmp/awscliv2.zip -d /tmp
+
+# Install (idempotent)
+if ! command -v aws &>/dev/null; then
+  /tmp/aws/install
+fi
+
+# Cleanup
+rm -rf /tmp/aws /tmp/awscliv2.zip
+
+# Verify
+aws --version
 
 ############################################
 # Install kubectl (Official Kubernetes Repo)
