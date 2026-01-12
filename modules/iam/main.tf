@@ -139,18 +139,5 @@ resource "aws_iam_instance_profile" "bastion_profile" {
 }
 
 
-resource "aws_eks_access_entry" "bastion_access" {
-  cluster_name  = aws_eks_cluster.eks[0].name
-  principal_arn = aws_iam_role.bastion_role.arn
-  type          = "STANDARD"
-}
 
-resource "aws_eks_access_policy_association" "bastion_admin" {
-  cluster_name  = aws_eks_cluster.eks[0].name
-  principal_arn = aws_iam_role.bastion_role.arn
-  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
 
-  access_scope {
-    type = "cluster"
-  }
-}

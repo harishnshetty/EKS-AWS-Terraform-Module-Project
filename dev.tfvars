@@ -1,9 +1,9 @@
 env            = "dev"
 region         = "ap-south-1"
-vpc_cidr_block = "10.0.0.0/16"
+vpc_cidr_block = "10.75.0.0/16"
 
-public_subnet  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-private_subnet = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+public_subnet  = ["10.75.1.0/24", "10.75.2.0/24", "10.75.3.0/24"]
+private_subnet = ["10.75.4.0/24", "10.75.5.0/24", "10.75.6.0/24"]
 
 
 # EKS
@@ -17,9 +17,9 @@ authentication_mode     = "API_AND_CONFIG_MAP"
 ondemand_instance_types = ["t3a.medium"]
 spot_instance_types     = ["c5a.large", "c5a.xlarge", "m5a.large", "m5a.xlarge", "c5.large", "m5.large", "t3a.large", "t3a.xlarge", "t3a.medium"]
 
-desired_capacity_on_demand = "0"
-min_capacity_on_demand     = "0"
-max_capacity_on_demand     = "0"
+desired_capacity_on_demand = "1"
+min_capacity_on_demand     = "1"
+max_capacity_on_demand     = "2"
 
 desired_capacity_spot = "1"
 min_capacity_spot     = "1"

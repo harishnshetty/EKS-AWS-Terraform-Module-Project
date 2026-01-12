@@ -5,10 +5,10 @@ resource "aws_security_group" "eks-cluster-sg" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = [aws_security_group.bastion-sg.id] // It should be specific IP range
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = [aws_security_group.bastion-sg.id]
   }
 
   egress {
