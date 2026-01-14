@@ -2,7 +2,7 @@ resource "helm_release" "aws-load-balancer-controller" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
-  version    = "1.16.0"
+  version    = "1.17.0"
   # timeout         = 2000
   namespace       = "kube-system"
   cleanup_on_fail = true
@@ -39,6 +39,15 @@ resource "helm_release" "aws-load-balancer-controller" {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = var.alb_controller_role_arn
   }
+
+  values = [
+    yamlencode({
+      enableGatewayAPI = true
+      extraArgs = {
+        "enable-gateway-api" = "true"
+      }
+    })
+  ]
 
   # depends_on = [kubernetes_service_account.alb_controller_sa]
 }
