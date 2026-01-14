@@ -1,9 +1,40 @@
 # https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html
 
+data "aws_iam_policy_document" "alb_controller_trust_policy" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(var.oidc_provider_url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(var.oidc_provider_url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+
+    principals {
+      identifiers = [var.oidc_provider_arn]
+      type        = "Federated"
+    }
+  }
+}
+
 resource "aws_iam_role" "alb_controller_role" {
-  count = var.is_alb_controller_enabled ? 1 : 0
-  name  = "${local.cluster_name}-alb-controller-role-${random_integer.random_suffix.result}"
-  assume_role_policy = jsonencode({
+  count              = var.is_alb_controller_enabled ? 1 : 0
+  name               = "${local.cluster_name}-alb-controller-role-${random_integer.random_suffix.result}"
+  assume_role_policy = data.aws_iam_policy_document.alb_controller_trust_policy.json
+}
+
+resource "aws_iam_policy" "alb_controller_policy" {
+  name        = "alb-controller-policy"
+  description = "IAM policy for AWS Load Balancer Controller"
+
+  policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
       {
@@ -254,11 +285,4 @@ resource "aws_iam_role" "alb_controller_role" {
       }
     ]
   })
-}
-
-resource "aws_iam_policy" "alb_controller_policy" {
-  name = "alb-controller-policy"
-  policy = jsonencode(
-    aws_iam_policy_document.alb_controller_policy
-  )
 }

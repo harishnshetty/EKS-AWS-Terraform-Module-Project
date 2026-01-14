@@ -13,3 +13,7 @@ output "oidc_provider_url" {
 output "oidc_provider_arn" {
   value = aws_iam_openid_connect_provider.eks-oidc.arn
 }
+
+output "cluster_certificate_authority_data" {
+  value = var.is_eks_cluster_enabled ? aws_eks_cluster.eks[0].certificate_authority[0].data : null
+}

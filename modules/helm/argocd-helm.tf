@@ -10,33 +10,41 @@ resource "helm_release" "argocd" {
   recreate_pods   = true
   replace         = true
 
-  set = [
-    {
-      name  = "server.service.type"
-      value = "ClusterIP" #LoadBalancer #ClusterIP #NodePort
-    },
-    {
-      name  = "server.ingress.enabled"
-      value = "false"
-    },
-    {
-      name  = "server.extraArgs[0]"
-      value = "--insecure"
-    },
-    {
-      name  = "server.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-internal"
-      value = "false"
-    },
+  set {
+    name  = "server.service.type"
+    value = "LoadBalancer" #LoadBalancer #ClusterIP #NodePort
+  }
 
-    # {
-    #   name  = "server.ingress.hosts[0]"
-    #   value = "your-domain.com" # Replace with your actual domain
-    # },
-    # {
-    #   name  = "server.ingress.annotations[external-dns.alpha.kubernetes.io/hostname]"
-    #   value = "your-domain.com" # Replace with your actual domain
-    # }
-  ]
+  set {
+    name  = "server.ingress.enabled"
+    value = "false"
+  }
+
+  set {
+    name  = "server.extraArgs[0]"
+    value = "--insecure"
+  }
+
+  set {
+    name  = "server.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-internal"
+    value = "false"
+  }
 
   depends_on = [helm_release.aws-load-balancer-controller]
+}
+
+data "kubernetes_secret" "argocd_admin_secret" {
+  metadata {
+    name      = "argocd-initial-admin-secret"
+    namespace = "argocd"
+  }
+  depends_on = [helm_release.argocd]
+}
+
+data "kubernetes_service" "argocd_server" {
+  metadata {
+    name      = "argocd-server"
+    namespace = "argocd"
+  }
+  depends_on = [helm_release.argocd]
 }

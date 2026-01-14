@@ -72,8 +72,8 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEBSCSIDriverPolicy" {
 
 resource "aws_iam_role_policy_attachment" "alb-controller-policy-attach" {
   count      = var.is_alb_controller_enabled ? 1 : 0
-  policy_arn = aws_iam_policy.AWSLoadBalancerControllerIAMPolicy.arn
-  role       = aws_iam_role.alb_controller_role.name
+  policy_arn = aws_iam_policy.alb_controller_policy.arn
+  role       = aws_iam_role.alb_controller_role[count.index].name
 }
 
 
