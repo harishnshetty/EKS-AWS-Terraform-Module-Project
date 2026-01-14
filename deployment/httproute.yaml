@@ -1,4 +1,4 @@
-apiVersion: gateway.networking.k8s.io/v1beta1
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-amazon-route
@@ -11,7 +11,7 @@ spec:
   rules:
     - matches:
         - path:
-            type: prefix
+            type: PathPrefix
             value: /
       backendRefs:
         - name: amazon-service # The name of your Kubernetes Service
@@ -19,7 +19,7 @@ spec:
           port: 80 # The port of your Kubernetes Service
 
 ---
-apiVersion: gateway.networking.k8s.io/v1beta1
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-flipkart-route
@@ -32,7 +32,7 @@ spec:
   rules:
     - matches:
         - path:
-            type: prefix
+            type: PathPrefix
             value: /
       backendRefs:
         - name: flipkart-service # The name of your Kubernetes Service

@@ -1,4 +1,4 @@
-apiVersion: gateway.networking.k8s.io/v1beta1
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: amazon-flipkart-gateway
@@ -7,31 +7,25 @@ metadata:
     # Optional: Makes the ALB internet-facing. Omit or set to "internal" for private ALBs.
     alb.networking.k8s.io/scheme: internet-facing
     alb.ingress.kubernetes.io/load-balancer-attributes: routing.http.redirect-to-https.enabled=true
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:970378220457:certificate/93296424-711a-4bb9-8bc3-f7a76c0f2d87
 spec:
   gatewayClassName: alb-gateway-class
-  listenerClasses:
+  listeners:
     - name: http
       port: 80
       protocol: HTTP
       hostname: "*.harishshetty.xyz"
       allowedRoutes:
-        - namespace: "amazon"
-        - namespace: "flipkart"
-
-      # Optional: Add an annotation here to redirect HTTP to HTTPS
-      # alb.networking.k8s.io/aws-load-balancer-ssl-redirect: "true"
+        namespaces:
+          from: All
     - name: https
       port: 443
       protocol: HTTPS
       hostname: "*.harishshetty.xyz"
       tls:
         mode: Terminate
+        options:
+          gateway.networking.k8s.io/cert-manager-issuer: "acm"
       allowedRoutes:
-        - namespace: "amazon"
-        - namespace: "flipkart"
-
-      certificateRefs:
-        # Replace with your actual ACM certificate ARN
-        - group: ""
-          kind: AWS::ACM::Certificate
-          name: arn:aws:acm:ap-south-1:970378220457:certificate/93296424-711a-4bb9-8bc3-f7a76c0f2d87
+        namespaces:
+          from: All
