@@ -11,7 +11,7 @@ is_eks_cluster_enabled  = true
 cluster_version         = "1.34"
 cluster_name            = "my-cluster"
 endpoint_private_access = true
-endpoint_public_access  = false
+endpoint_public_access  = true
 authentication_mode     = "API_AND_CONFIG_MAP"
 
 ondemand_instance_types = ["t3a.medium"]

@@ -95,3 +95,14 @@ resource "aws_eks_access_policy_association" "bastion_admin" {
     type = "cluster"
   }
 }
+
+module "helm" {
+  source = "./modules/helm"
+
+  cluster_name            = module.eks.cluster_name
+  vpc_id                  = module.vpc.vpc_id
+  region                  = var.region
+  alb_controller_role_arn = module.iam.alb_controller_role_arn
+
+  depends_on = [module.eks, module.vpc, module.iam]
+}

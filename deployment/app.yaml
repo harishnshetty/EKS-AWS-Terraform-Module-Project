@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app
+  name: amazon-app
+  namespace: amazon
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: demo
+      app: amazon
   template:
     metadata:
       labels:
-        app: demo
+        app: amazon
     spec:
       containers:
-        - name: demo
+        - name: amazon
           image: harishnshetty/amazon:latest
           ports:
             - containerPort: 80
@@ -21,10 +22,45 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-service
+  name: amazon-service
+  namespace: amazon
 spec:
   selector:
-    app: demo
+    app: amazon
+  ports:
+    - port: 80
+      targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flipkart-app
+  namespace: flipkart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flipkart
+  template:
+    metadata:
+      labels:
+        app: flipkart
+    spec:
+      containers:
+        - name: flipkart
+          image: harishnshetty/flipkart:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flipkart-service
+  namespace: flipkart
+spec:
+  selector:
+    app: flipkart
   ports:
     - port: 80
       targetPort: 80

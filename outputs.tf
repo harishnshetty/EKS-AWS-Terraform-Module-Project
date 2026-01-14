@@ -20,9 +20,10 @@ output "region" {
 }
 
 output "argocd_url" {
-  value = "https://"
+  value = module.helm.argocd_url
 }
 
 output "argocd_admin_password" {
-  value = ""
+  value     = module.helm.argocd_password
+  sensitive = true
 }
