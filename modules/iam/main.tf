@@ -68,6 +68,16 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEBSCSIDriverPolicy" {
   role       = aws_iam_role.eks-nodegroup-role[count.index].name
 }
 
+# ALB Controller Attach Policy
+
+resource "aws_iam_role_policy_attachment" "alb-controller-policy-attach" {
+  count      = var.is_alb_controller_enabled ? 1 : 0
+  policy_arn = aws_iam_policy.AWSLoadBalancerControllerIAMPolicy.arn
+  role       = aws_iam_role.alb_controller_role.name
+}
+
+
+
 # OIDC
 data "aws_iam_policy_document" "eks_oidc_assume_role_policy" {
   statement {
@@ -110,6 +120,8 @@ resource "aws_iam_policy" "eks-oidc-policy" {
 }
 
 
+
+
 # Bastion IAM Role
 resource "aws_iam_role" "bastion_role" {
   name = "${local.cluster_name}-bastion-role-${random_integer.random_suffix.result}"
@@ -127,6 +139,8 @@ resource "aws_iam_role" "bastion_role" {
     ]
   })
 }
+
+
 
 resource "aws_iam_role_policy_attachment" "bastion_admin_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"

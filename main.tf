@@ -25,6 +25,9 @@ module "iam" {
   cluster_name                  = "${local.env}-${var.cluster_name}"
   is_eks_role_enabled           = true
   is_eks_nodegroup_role_enabled = true
+  is_alb_controller_enabled     = true
+  region                        = var.region
+  vpc_id                        = module.vpc.vpc_id
   oidc_provider_url             = module.eks.oidc_provider_url
   oidc_provider_arn             = module.eks.oidc_provider_arn
 

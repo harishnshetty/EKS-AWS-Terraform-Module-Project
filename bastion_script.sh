@@ -12,6 +12,7 @@ apt-get upgrade -y
 apt-get install -y \
   curl \
   git \
+  jq \
   ca-certificates \
   gnupg \
   lsb-release \
