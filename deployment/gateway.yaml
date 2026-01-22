@@ -3,13 +3,8 @@ kind: Gateway
 metadata:
   name: amazon-flipkart-gateway
   namespace: gateway
-  annotations:
-    # Optional: Makes the ALB internet-facing. Omit or set to "internal" for private ALBs.
-    alb.networking.k8s.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/load-balancer-attributes: routing.http.redirect-to-https.enabled=true
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:970378220457:certificate/93296424-711a-4bb9-8bc3-f7a76c0f2d87
 spec:
-  gatewayClassName: alb-gateway-class
+  gatewayClassName: nginx
   listeners:
     - name: http
       port: 80
@@ -24,8 +19,8 @@ spec:
       hostname: "*.harishshetty.xyz"
       tls:
         mode: Terminate
-        options:
-          gateway.networking.k8s.io/cert-manager-issuer: "acm"
+        certificateRefs:
+          - name: harishshetty-cred-tls
       allowedRoutes:
         namespaces:
           from: All

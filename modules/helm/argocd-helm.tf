@@ -33,15 +33,7 @@ resource "helm_release" "argocd" {
   depends_on = [helm_release.aws-load-balancer-controller]
 }
 
-data "kubernetes_secret" "argocd_admin_secret" {
-  metadata {
-    name      = "argocd-initial-admin-secret"
-    namespace = "argocd"
-  }
-  depends_on = [helm_release.argocd]
-}
-
-data "kubernetes_service" "argocd_server" {
+data "kubernetes_service_v1" "argocd_server" {
   metadata {
     name      = "argocd-server"
     namespace = "argocd"
