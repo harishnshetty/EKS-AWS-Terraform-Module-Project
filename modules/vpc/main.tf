@@ -28,7 +28,7 @@ resource "aws_subnet" "public_subnet" {
     Name                                        = "public-${var.env}-${count.index + 1}"
     Env                                         = var.env
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/role/elb"                    = "1" # For internet facing ALB
   }
 
   depends_on = [aws_vpc.main]
@@ -44,7 +44,7 @@ resource "aws_subnet" "private_subnet" {
     Name                                        = "private-${var.env}-${count.index + 1}"
     Env                                         = var.env
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-    "kubernetes.io/role/internal-elb"           = "1"
+    "kubernetes.io/role/internal-elb"           = "1" # For internal facing ALB
   }
 
   depends_on = [aws_vpc.main]
@@ -104,8 +104,7 @@ resource "aws_route_table" "public_rt" {
     env  = var.env
   }
 
-  depends_on = [aws_vpc.main
-  ]
+  depends_on = [aws_vpc.main]
 }
 
 resource "aws_route_table_association" "public_rt_association" {

@@ -1,0 +1,18 @@
+NAME                                            CREATED AT
+albtargetcontrolconfigs.elbv2.k8s.aws           2026-01-22T15:07:07Z
+applicationnetworkpolicies.networking.k8s.aws   2026-01-22T15:00:56Z
+applications.argoproj.io                        2026-01-22T15:08:24Z
+applicationsets.argoproj.io                     2026-01-22T15:08:25Z
+appprojects.argoproj.io                         2026-01-22T15:08:24Z
+clusternetworkpolicies.networking.k8s.aws       2026-01-22T15:00:56Z
+clusterpolicyendpoints.networking.k8s.aws       2026-01-22T15:00:56Z
+cninodes.vpcresources.k8s.aws                   2026-01-22T15:00:56Z
+eniconfigs.crd.k8s.amazonaws.com                2026-01-22T15:02:24Z
+globalaccelerators.aga.k8s.aws                  2026-01-22T15:07:06Z
+ingressclassparams.elbv2.k8s.aws                2026-01-22T15:07:07Z
+listenerruleconfigurations.gateway.k8s.aws      2026-01-22T15:07:08Z
+loadbalancerconfigurations.gateway.k8s.aws      2026-01-22T15:07:08Z
+policyendpoints.networking.k8s.aws              2026-01-22T15:00:55Z
+securitygrouppolicies.vpcresources.k8s.aws      2026-01-22T15:00:56Z
+targetgroupbindings.elbv2.k8s.aws               2026-01-22T15:07:07Z
+targetgroupconfigurations.gateway.k8s.aws       2026-01-22T15:07:08Z

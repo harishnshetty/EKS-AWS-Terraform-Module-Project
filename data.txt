@@ -1,0 +1,24 @@
+NAMESPACE     NAME                                                READY   STATUS    RESTARTS   AGE   IP           NODE                                        NOMINATED NODE   READINESS GATES
+argocd        argocd-application-controller-0                     1/1     Running   0          10m   10.0.5.79    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+argocd        argocd-applicationset-controller-589cc46b79-vqv25   1/1     Running   0          10m   10.0.4.87    ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+argocd        argocd-dex-server-fc48df747-mk5rd                   1/1     Running   0          10m   10.0.5.207   ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+argocd        argocd-notifications-controller-5db7b5d885-gg8zm    1/1     Running   0          10m   10.0.5.235   ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+argocd        argocd-redis-654bd7d9cd-mhdg9                       1/1     Running   0          10m   10.0.5.22    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+argocd        argocd-repo-server-6c49f97bcf-bd94j                 1/1     Running   0          10m   10.0.4.48    ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+argocd        argocd-server-559cd7557c-kfg69                      1/1     Running   0          10m   10.0.5.248   ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   aws-load-balancer-controller-898b78f9-2xc45         1/1     Running   0          11m   10.0.5.58    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   aws-load-balancer-controller-898b78f9-vrpmv         1/1     Running   0          11m   10.0.4.125   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   aws-node-cn7n9                                      2/2     Running   0          12m   10.0.5.13    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   aws-node-w6vpr                                      2/2     Running   0          12m   10.0.4.110   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   coredns-6f4454cb57-jrn27                            1/1     Running   0          12m   10.0.4.136   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   coredns-6f4454cb57-srv2d                            1/1     Running   0          12m   10.0.4.243   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   ebs-csi-controller-6867f4c669-mzknb                 6/6     Running   0          12m   10.0.4.59    ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   ebs-csi-controller-6867f4c669-t2qms                 6/6     Running   0          12m   10.0.5.55    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   ebs-csi-node-hgglk                                  3/3     Running   0          12m   10.0.5.172   ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   ebs-csi-node-t7t5w                                  3/3     Running   0          12m   10.0.4.225   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   efs-csi-controller-787885c5d4-4q7fr                 3/3     Running   0          12m   10.0.5.215   ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   efs-csi-controller-787885c5d4-v6b77                 3/3     Running   0          12m   10.0.4.94    ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   efs-csi-node-b85vv                                  3/3     Running   0          12m   10.0.5.13    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   efs-csi-node-s5lmx                                  3/3     Running   0          12m   10.0.4.110   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>
+kube-system   kube-proxy-xmdmd                                    1/1     Running   0          12m   10.0.5.13    ip-10-0-5-13.ap-south-1.compute.internal    <none>           <none>
+kube-system   kube-proxy-zph7l                                    1/1     Running   0          12m   10.0.4.110   ip-10-0-4-110.ap-south-1.compute.internal   <none>           <none>

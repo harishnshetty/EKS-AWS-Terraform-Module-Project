@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: amazon-flipkart-gateway
   namespace: gateway
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 spec:
   gatewayClassName: nginx
   listeners:

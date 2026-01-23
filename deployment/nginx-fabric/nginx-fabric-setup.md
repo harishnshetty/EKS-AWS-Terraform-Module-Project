@@ -1,0 +1,1 @@
+https://docs.nginx.com/nginx-gateway-fabric/
