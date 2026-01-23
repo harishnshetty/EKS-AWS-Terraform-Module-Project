@@ -1,40 +1,53 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: http-amazon-route
-  namespace: gateway
+  name: amazon-httproute
+  namespace: amazon
 spec:
   parentRefs:
-    - name: amazon-flipkart-gateway # Links to the Gateway resource created above
+    - name: nginx-gateway
+      sectionName: http
+      namespace: nginx-gateway
   hostnames:
     - "amazon.harishshetty.xyz"
   rules:
     - matches:
-        - path:
+        - type: PathPrefix
+          path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: amazon-service # The name of your Kubernetes Service
-          namespace: amazon
-          port: 80 # The port of your Kubernetes Service
-
+        - name: amazon-httpd
+          port: 80
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: http-flipkart-route
-  namespace: gateway
+  name: flipkart-httproute
+  namespace: flipkart
 spec:
   parentRefs:
-    - name: amazon-flipkart-gateway # Links to the Gateway resource created above
+    - name: nginx-gateway
+      sectionName: http
+      namespace: nginx-gateway
   hostnames:
     - "flipkart.harishshetty.xyz"
   rules:
     - matches:
-        - path:
+        - type: PathPrefix
+          path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: flipkart-service # The name of your Kubernetes Service
-          namespace: flipkart
-          port: 80 # The port of your Kubernetes Service
+        - name: flipkart-httpd
+          port: 80
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
