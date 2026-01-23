@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: amazon
+  name: amazon-ns
 
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: flipkart
+  name: flipkart-ns
 
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nginx-gateway
+  name: nginx-gateway-ns

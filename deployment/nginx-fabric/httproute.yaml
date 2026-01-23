@@ -1,53 +1,26 @@
-apiVersion: gateway.networking.k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
-  name: amazon-httproute
-  namespace: amazon
+  name: my-http-app-route
+  namespace: nginx-gateway-ns
 spec:
   parentRefs:
-    - name: nginx-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: public-gateway
       sectionName: http
-      namespace: nginx-gateway
-  hostnames:
-    - "amazon.harishshetty.xyz"
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: public-gateway
+      sectionName: https
   rules:
-    - matches:
-        - type: PathPrefix
-          path:
-            type: PathPrefix
-            value: /
-      backendRefs:
-        - name: amazon-httpd
+    - backendRefs:
+        - name: amazon-service
+          namespace: amazon-ns
           port: 80
-      filters:
-        - type: RequestRedirect
-          requestRedirect:
-            scheme: https
-            statusCode: 301
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: flipkart-httproute
-  namespace: flipkart
-spec:
-  parentRefs:
-    - name: nginx-gateway
-      sectionName: http
-      namespace: nginx-gateway
-  hostnames:
-    - "flipkart.harishshetty.xyz"
-  rules:
-    - matches:
-        - type: PathPrefix
-          path:
-            type: PathPrefix
-            value: /
-      backendRefs:
-        - name: flipkart-httpd
+          hostname: "amazon.harishshetty.xyz"
+    - backendRefs:
+        - name: flipkart-service
+          namespace: flipkart-ns
           port: 80
-      filters:
-        - type: RequestRedirect
-          requestRedirect:
-            scheme: https
-            statusCode: 301
+          hostname: "flipkart.harishshetty.xyz"
