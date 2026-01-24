@@ -20,7 +20,10 @@ helm repo update
 helm search repo argo/argo-cd --versions
 helm list -A
 
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update prometheus-community
 
+helm search repo prometheus-community/kube-prometheus-stack --versions
 
 | Gateway Implementation   | controllerName                                   |
 | ------------------------ | ------------------------------------------------ |
@@ -34,3 +37,15 @@ kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/re
 
 
 aws eks update-kubeconfig --name dev-my-cluster --region ap-south-1
+
+
+sudo apt install jq -y
+
+kubectl get svc argocd-server -n argocd -o json | jq --raw-output '.status.loadBalancer.ingress[0].hostname'
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+
+kubectl get secret --namespace prometheus prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+helm list -n prometheus

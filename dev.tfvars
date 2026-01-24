@@ -21,8 +21,8 @@ desired_capacity_on_demand = "1"
 min_capacity_on_demand     = "1"
 max_capacity_on_demand     = "2"
 
-desired_capacity_spot = "1"
-min_capacity_spot     = "1"
+desired_capacity_spot = "2"
+min_capacity_spot     = "2"
 max_capacity_spot     = "10"
 
 addons = [

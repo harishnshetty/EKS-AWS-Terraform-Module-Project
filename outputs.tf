@@ -22,3 +22,11 @@ output "region" {
 output "argocd_url" {
   value = module.helm.argocd_url
 }
+
+output "prometheus_url" {
+  value = module.helm.prometheus_url
+}
+
+output "grafana_url" {
+  value = module.helm.grafana_url
+}

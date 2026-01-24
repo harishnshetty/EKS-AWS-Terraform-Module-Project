@@ -30,6 +30,11 @@ resource "helm_release" "argocd" {
     value = "false"
   }
 
+  set {
+    name  = "crds.keep"
+    value = "false"
+  }
+
   depends_on = [helm_release.aws-load-balancer-controller]
 }
 
@@ -38,5 +43,5 @@ data "kubernetes_service_v1" "argocd_server" {
     name      = "argocd-server"
     namespace = "argocd"
   }
-  depends_on = [helm_release.argocd]
+  depends_on = [helm_release.aws-load-balancer-controller]
 }
