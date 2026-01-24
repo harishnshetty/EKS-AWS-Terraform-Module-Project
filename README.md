@@ -8,7 +8,7 @@
 
 [![Channel Link](https://github.com/harishnshetty/image-data-project/blob/f4cbae3f8429073cb96264ef402ecbe511db6bc4/2eks.JPG)](https://youtu.be/BgyYqUXuHuk?si=Gi6vkxhnVJQBILkG)
 
-
+## 1. Terraform Installation
 
 ```bash
 wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -16,7 +16,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo apt update && sudo apt install -y terraform packer git jq unzip
 ```
 
-## AWS CLI Installation
+## 2. AWS CLI Installation
 
 Refer: [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
@@ -27,7 +27,7 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-## AWS CLI Configuration
+## 3. AWS CLI Configuration
 
 ```bash
 aws configure
