@@ -16,15 +16,18 @@ terraform {
       version = "~> 2.0"
     }
   }
-  # backend "s3" {
-  #   bucket         = "dev-harish-eks-cluster-bucket"
-  #   region         = "ap-south-1"
-  #   key            = "terraform.tfstate"
-  #   use_lockfile   = true
-  #   encrypt        = true
-  # }
 }
 
 provider "aws" {
   region = var.region
 }
+
+
+
+# backend "s3" {
+#   bucket         = "dev-harish-eks-cluster-bucket"
+#   region         = "ap-south-1"
+#   key            = "terraform.tfstate"
+#   use_lockfile   = true
+#   encrypt        = true
+# }

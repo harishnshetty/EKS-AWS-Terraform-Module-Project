@@ -27,6 +27,8 @@ resource "aws_eks_cluster" "eks" {
 # OIDC Provider
 # Data source for TLS certificate needs to be correct.
 # Usually we get the OIDC issuer URL from the cluster and then get the thumbprint.
+# ServiceAccount → OIDC token → STS Security Token Service verifies identity → STS Security Token Service issues temp creds → IAM role allows alb ingress controller to create ALB
+# 
 data "tls_certificate" "eks_certificate" {
   url = aws_eks_cluster.eks[0].identity[0].oidc[0].issuer
 }
@@ -110,9 +112,12 @@ resource "aws_eks_node_group" "spot-node" {
     "Name" = "${var.cluster_name}-spot-nodes"
   }
   tags_all = {
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned" # The resource is created and managed specifically for this cluster. If the cluster is deleted, these resources should be cleaned up.
     "Name"                                      = "${var.cluster_name}-ondemand-nodes"
   }
+
+  # "shared": The resource can be used by multiple clusters (less common for node groups, more for subnets/VPCs).
+
   labels = {
     type      = "spot"
     lifecycle = "spot"
