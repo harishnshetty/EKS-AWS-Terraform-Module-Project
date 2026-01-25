@@ -4,9 +4,9 @@
 ## For more projects, check out  
 [https://harishnshetty.github.io/projects.html](https://harishnshetty.github.io/projects.html)
 
-[![Video Tutorial](https://github.com/harishnshetty/image-data-project/blob/695c5d6cdd52b3dcd21464f716977e1124e394fd/1eksterrafrom.JPG)](https://youtu.be/BgyYqUXuHuk?si=Gi6vkxhnVJQBILkG)
+[![Video Tutorial](https://github.com/harishnshetty/image-data-project/blob/695c5d6cdd52b3dcd21464f716977e1124e394fd/1eksterrafrom.JPG)](https://youtu.be/9sTzMx86vwE)
 
-[![Channel Link](https://github.com/harishnshetty/image-data-project/blob/f4cbae3f8429073cb96264ef402ecbe511db6bc4/2eks.JPG)](https://youtu.be/BgyYqUXuHuk?si=Gi6vkxhnVJQBILkG)
+[![Channel Link](https://github.com/harishnshetty/image-data-project/blob/f4cbae3f8429073cb96264ef402ecbe511db6bc4/2eks.JPG)](https://youtu.be/9sTzMx86vwE)
 
 ## 1. Terraform Installation
 
@@ -189,6 +189,8 @@ kubectl delete -f .
 terraform plan -var-file="dev.tfvars"
 terraform apply -var-file="dev.tfvars" -auto-approve
 terraform destroy -var-file="dev.tfvars" -auto-approve
+
+eksctl delete cluster --name testing-my-cluster --region ap-south-1
 
 
 terraform destroy -var-file="stage.tfvars" -auto-approve
